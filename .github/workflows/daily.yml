@@ -1,0 +1,28 @@
+name: Daily YouTube Short
+
+on:
+  schedule:
+    - cron: '0 3 * * *' # Runs automatically every day at 9:00 AM Bangladesh Time
+  workflow_dispatch:      # Adds a manual "Run workflow" button for testing
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout files
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install tools
+        run: pip install -r requirements.txt
+
+      - name: Make and Upload Video
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
+          GDRIVE_SERVICE_ACCOUNT_JSON: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_JSON }}
+        run: python make_video.py
