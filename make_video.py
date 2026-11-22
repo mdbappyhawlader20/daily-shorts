@@ -34,10 +34,10 @@ Return ONLY valid JSON with these exact keys:
   - "visual_prompt": detailed description for a clean flat 2D vector illustration (e.g. "minimalist flat 2D editorial vector illustration of a golden brain trapped inside a maze of price tags, dark navy background #090d16, bold gold #facc15 and cyan #38bdf8 accents, clean geometric shapes, no text")
 """
 
-models_to_try = ["gemini-3.8-flash", "gemini-2.5-flash-lite", "gemini-3.0-flash"]
+models_to_try = ["gemini-3.5-flash-lite", "gemini-3.8-flash"]
 response = None
 
-for attempt in range(5):
+for attempt in range(8):
     model_name = models_to_try[attempt % len(models_to_try)]
     try:
         print(f"Generating script with {model_name} (attempt {attempt + 1})...")
